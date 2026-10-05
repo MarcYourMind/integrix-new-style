@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="NEW STYLE BARBER SHOP en Girardota, Antioquia. Reserva tu próxima visita online o comunícate directamente con la barbería.">
+  <title>NEW STYLE BARBER SHOP | Girardota</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#111111;
+      --ink-2:#191919;
+      --paper:#f1eadc;
+      --paper-2:#ded3c1;
+      --accent:#d65b31;
+      --accent-2:#ff6b3d;
+      --muted:#a8a194;
+      --line:rgba(241,234,220,.18);
+      --max:1240px;
+      --radius:22px;
+      --shadow:0 24px 70px rgba(0,0,0,.22);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--ink);
+      color:var(--paper);
+      font-family:"DM Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    button,input{font:inherit}
+    img,svg{display:block;max-width:100%}
+    ::selection{background:var(--accent);color:#fff}
+
+    .skip{
+      position:absolute;left:-999px;top:12px;
+      background:var(--paper);color:var(--ink);
+      padding:10px 14px;border-radius:999px;z-index:999;
+    }
+    .skip:focus{left:12px}
+
+    .shell{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+    .eyebrow{
+      display:flex;align-items:center;gap:10px;
+      text-transform:uppercase;letter-spacing:.18em;
+      font-size:12px;font-weight:700;color:var(--accent-2);
+    }
+    .eyebrow:before{content:"";width:34px;height:1px;background:currentColor}
+
+    .nav{
+      position:fixed;inset:0 0 auto 0;z-index:50;
+      background:linear-gradient(to bottom,rgba(17,17,17,.92),rgba(17,17,17,.72),transparent);
+      backdrop-filter:blur(10px);
+    }
+    .nav-inner{
+      width:min(calc(100% - 40px),var(--max));margin:auto;
+      display:flex;align-items:center;justify-content:space-between;
+      min-height:86px;border-bottom:1px solid var(--line);
+    }
+    .brand{
+      display:inline-flex;align-items:center;gap:13px;text-decoration:none;
+      font-weight:700;letter-spacing:.02em;
+    }
+    .brand-mark{
+      width:42px;height:42px;border:1px solid rgba(241,234,220,.44);
+      display:grid;place-items:center;position:relative;overflow:hidden;
+    }
+    .brand-mark:before,.brand-mark:after{
+      content:"";position:absolute;width:70px;height:5px;background:var(--accent);
+      transform:rotate(-45deg);
+    }
+    .brand-mark:before{top:6px;left:-27px}
+    .brand-mark:after{bottom:5px;right:-27px;background:var(--paper)}
+    .brand-copy{line-height:1.05}
+    .brand-copy strong{display:block;font-size:13px;letter-spacing:.13em}
+    .brand-copy span{font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+
+    .nav-links{display:flex;align-items:center;gap:28px}
+    .nav-links a{
+      text-decoration:none;font-size:14px;color:#d8d0c3;transition:.2s ease;
+    }
+    .nav-links a:hover,.nav-links a:focus-visible{color:#fff}
+    .nav-cta{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:46px;padding:0 19px;border-radius:999px;
+      background:var(--paper);color:var(--ink)!important;font-weight:700;
+    }
+    .menu-btn{
+      display:none;border:1px solid var(--line);background:transparent;color:var(--paper);
+      width:46px;height:46px;border-radius:50%;cursor:pointer;
+    }
+    .menu-btn span,.menu-btn:before,.menu-btn:after{
+      content:"";display:block;width:18px;height:1px;background:currentColor;margin:5px auto;transition:.2s;
+    }
+
+    .hero{
+      min-height:100svh;display:grid;align-items:end;
+      padding:150px 0 48px;position:relative;isolation:isolate;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";position:absolute;inset:-20%;
+      background:
+        radial-gradient(circle at 82% 24%,rgba(214,91,49,.20),transparent 22%),
+        radial-gradient(circle at 70% 64%,rgba(241,234,220,.08),transparent 18%);
+      z-index:-2;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:minmax(0,1.15fr) minmax(350px,.85fr);
+      align-items:end;gap:64px;
+    }
+    .hero h1{
+      font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;
+      font-size:clamp(72px,10vw,156px);line-height:.84;letter-spacing:-.035em;
+      margin:20px 0 28px;max-width:8ch;
+    }
+    .hero h1 .stroke{
+      color:transparent;-webkit-text-stroke:1.2px var(--paper);
+    }
+    .hero-intro{max-width:630px;font-size:clamp(18px,2vw,23px);color:#d4cbbb;margin:0 0 34px}
+    .cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:54px;padding:0 24px;border-radius:999px;text-decoration:none;
+      border:1px solid transparent;font-weight:700;transition:transform .2s ease,background .2s ease,border-color .2s ease;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-primary:hover{background:var(--accent-2)}
+    .btn-secondary{border-color:rgba(241,234,220,.28);background:rgba(255,255,255,.02)}
+    .btn-secondary:hover{border-color:rgba(241,234,220,.6)}
+    .arrow{font-size:19px;transform:translateY(-1px)}
+
+    .hero-art{
+      min-height:590px;position:relative;display:grid;place-items:center;
+    }
+    .hero-art:before{
+      content:"";position:absolute;width:min(36vw,460px);aspect-ratio:1;
+      border:1px solid rgba(241,234,220,.18);border-radius:50%;
+      box-shadow:0 0 0 54px rgba(241,234,220,.02),0 0 0 108px rgba(241,234,220,.018);
+    }
+    .monogram{
+      font-family:"Anton",Impact,sans-serif;font-size:clamp(170px,24vw,350px);
+      line-height:.7;color:var(--paper);letter-spacing:-.08em;
+      position:relative;z-index:2;transform:rotate(-4deg);
+      text-shadow:0 30px 55px rgba(0,0,0,.28);
+    }
+    .monogram:after{
+      content:"";position:absolute;right:-12%;bottom:-9%;width:55%;height:10px;
+      background:var(--accent);transform:rotate(-12deg);
+    }
+    .art-tag{
+      position:absolute;left:0;bottom:6%;writing-mode:vertical-rl;
+      text-transform:uppercase;letter-spacing:.24em;font-size:11px;color:var(--muted);
+    }
+    .art-year{
+      position:absolute;right:5%;top:8%;width:86px;height:86px;border-radius:50%;
+      border:1px solid rgba(241,234,220,.24);display:grid;place-items:center;
+      text-align:center;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#bfb5a6;
+      transform:rotate(7deg);
+    }
+
+    .trust{
+      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+      background:var(--ink-2);
+    }
+    .trust-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);
+    }
+    .trust-item{
+      min-height:118px;padding:28px 24px;border-right:1px solid var(--line);
+      display:flex;flex-direction:column;justify-content:center;
+    }
+    .trust-item:first-child{padding-left:0}
+    .trust-item:last-child{border-right:0}
+    .trust-item b{text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:#fff}
+    .trust-item span{margin-top:8px;color:var(--muted);font-size:14px}
+
+    section{padding:130px 0}
+    .section-head{
+      display:grid;grid-template-columns:.75fr 1.25fr;gap:48px;align-items:start;margin-bottom:72px;
+    }
+    .section-head h2{
+      font-family:"Anton",Impact,sans-serif;font-size:clamp(54px,6vw,90px);
+      line-height:.94;font-weight:400;text-transform:uppercase;letter-spacing:-.025em;margin:0;
+    }
+    .section-head p{max-width:620px;margin:12px 0 0;font-size:20px;color:#c5bbab}
+
+    .visit{background:var(--paper);color:var(--ink)}
+    .visit .eyebrow{color:#a84222}
+    .visit .section-head p{color:#5f594f}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(17,17,17,.15);border:1px solid rgba(17,17,17,.15)}
+    .step{background:var(--paper);padding:42px;min-height:330px;display:flex;flex-direction:column}
+    .step-num{
+      font-family:"Anton",Impact,sans-serif;font-size:64px;line-height:1;color:var(--accent);
+    }
+    .step h3{font-size:25px;margin:44px 0 12px}
+    .step p{color:#655f55;margin:0 0 26px;max-width:30ch}
+    .step a{margin-top:auto;font-weight:700;text-underline-offset:4px}
+
+    .craft{position:relative;overflow:hidden}
+    .craft-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .poster{
+      min-height:650px;border:1px solid var(--line);position:relative;overflow:hidden;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.05),transparent 42%),
+        radial-gradient(circle at 75% 18%,rgba(214,91,49,.38),transparent 18%),
+        #151515;
+      box-shadow:var(--shadow);
+    }
+    .poster:before{
+      content:"NEW\A STYLE";white-space:pre;
+      position:absolute;left:7%;bottom:3%;
+      font-family:"Anton",Impact,sans-serif;font-size:clamp(95px,12vw,190px);
+      line-height:.72;color:rgba(241,234,220,.06);letter-spacing:-.06em;
+    }
+    .razor{
+      position:absolute;left:50%;top:47%;width:72%;height:48px;
+      background:linear-gradient(90deg,#c7c0b5,#f4eee2 45%,#8f887e);
+      border-radius:9px 4px 4px 9px;transform:translate(-50%,-50%) rotate(-28deg);
+      box-shadow:0 25px 60px rgba(0,0,0,.35);
+    }
+    .razor:after{
+      content:"";position:absolute;width:46%;height:28px;right:-37%;top:10px;
+      border:5px solid #a64729;border-left:0;border-radius:0 20px 20px 0;
+    }
+    .razor:before{
+      content:"";position:absolute;left:7%;right:7%;bottom:6px;height:1px;background:rgba(17,17,17,.38);
+    }
+    .craft-copy h2{
+      font-family:"Anton",Impact,sans-serif;font-size:clamp(62px,7vw,104px);line-height:.88;
+      text-transform:uppercase;font-weight:400;letter-spacing:-.03em;margin:20px 0 30px;
+    }
+    .craft-copy p{font-size:19px;color:#c8bfb0;max-width:560px}
+    .micro-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}
+    .micro{
+      padding-top:16px;border-top:1px solid var(--line);
+      color:#d6cebf;font-size:14px;
+    }
+    .micro b{display:block;color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+
+    .info{background:#171717}
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .info-card{
+      border:1px solid var(--line);min-height:300px;padding:32px;
+      display:flex;flex-direction:column;transition:.2s ease;background:rgba(255,255,255,.012);
+    }
+    .info-card:hover{transform:translateY(-4px);border-color:rgba(241,234,220,.34)}
+    .info-icon{font-family:"Anton",Impact,sans-serif;font-size:42px;color:var(--accent)}
+    .info-card h3{font-size:24px;margin:30px 0 10px}
+    .info-card p{color:var(--muted);margin:0 0 24px;max-width:32ch}
+    .info-card a{margin-top:auto;text-underline-offset:4px;font-weight:700}
+
+    .location{padding-bottom:70px}
+    .location-card{
+      background:var(--paper);color:var(--ink);
+      display:grid;grid-template-columns:1.05fr .95fr;min-height:520px;
+    }
+    .location-copy{padding:64px}
+    .location-copy .eyebrow{color:#a84222}
+    .location-copy h2{
+      font-family:"Anton",Impact,sans-serif;font-size:clamp(56px,6vw,90px);
+      line-height:.9;text-transform:uppercase;font-weight:400;margin:24px 0;
+    }
+    .address{font-size:22px;max-width:20ch;margin-bottom:30px}
+    .contact-stack{display:grid;gap:11px;margin:34px 0}
+    .contact-stack a{font-weight:700;text-underline-offset:4px}
+    .map-art{
+      position:relative;overflow:hidden;min-height:440px;
+      background:
+        linear-gradient(35deg,transparent 47%,rgba(214,91,49,.55) 48%,rgba(214,91,49,.55) 50%,transparent 51%),
+        linear-gradient(145deg,transparent 47%,rgba(241,234,220,.10) 48%,rgba(241,234,220,.10) 50%,transparent 51%),
+        #101010;
+      background-size:88px 88px,64px 64px;
+    }
+    .pin{
+      position:absolute;left:52%;top:48%;width:92px;height:92px;border-radius:50% 50% 50% 0;
+      background:var(--accent);transform:translate(-50%,-50%) rotate(-45deg);
+      box-shadow:0 18px 40px rgba(0,0,0,.34);
+    }
+    .pin:after{
+      content:"";position:absolute;width:34px;height:34px;border-radius:50%;
+      background:var(--paper);left:29px;top:29px;
+    }
+    .map-label{
+      position:absolute;left:9%;bottom:8%;
+      padding:12px 16px;background:rgba(17,17,17,.86);border:1px solid rgba(255,255,255,.14);
+      font-size:12px;text-transform:uppercase;letter-spacing:.12em;
+    }
+
+    .faq{padding-top:70px}
+    .faq-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:80px}
+    .faq h2{
+      font-family:"Anton",Impact,sans-serif;font-size:clamp(58px,6vw,94px);
+      text-transform:uppercase;font-weight:400;line-height:.9;margin:18px 0 0;
+    }
+    details{border-top:1px solid var(--line);padding:24px 0}
+    details:last-child{border-bottom:1px solid var(--line)}
+    summary{cursor:pointer;list-style:none;font-size:19px;font-weight:700;display:flex;justify-content:space-between;gap:20px}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"+";font-size:25px;color:var(--accent);font-weight:400}
+    details[open] summary:after{content:"–"}
+    details p{color:var(--muted);max-width:62ch;margin:15px 0 0}
+
+    .closing{
+      padding:90px 0 110px;text-align:center;border-top:1px solid var(--line);
+    }
+    .closing h2{
+      font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;
+      font-size:clamp(68px,9vw,138px);line-height:.86;letter-spacing:-.035em;
+      max-width:10ch;margin:0 auto 30px;
+    }
+    .closing p{color:#beb5a7;font-size:19px;margin:0 auto 30px;max-width:560px}
+
+    footer{border-top:1px solid var(--line);padding:36px 0 46px;color:var(--muted);font-size:13px}
+    .footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:flex-end}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}
+    .footer-links a{text-underline-offset:4px}
+
+    :focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
+
+    @media (max-width:900px){
+      .nav-links{
+        position:fixed;left:20px;right:20px;top:78px;background:#171717;border:1px solid var(--line);
+        padding:24px;border-radius:18px;display:none;flex-direction:column;align-items:stretch;gap:6px;box-shadow:var(--shadow);
+      }
+      .nav-links.open{display:flex}
+      .nav-links a{padding:12px}
+      .menu-btn{display:block}
+      .hero-grid,.section-head,.craft-grid,.location-card,.faq-grid{grid-template-columns:1fr}
+      .hero{padding-top:130px}
+      .hero-art{min-height:390px}
+      .art-tag{left:3%}
+      .trust-grid{grid-template-columns:1fr 1fr}
+      .trust-item{border-bottom:1px solid var(--line)}
+      .trust-item:nth-child(2){border-right:0}
+      .steps,.info-grid{grid-template-columns:1fr}
+      .section-head{gap:24px}
+      .craft-grid{gap:44px}
+      .poster{min-height:520px}
+      .faq-grid{gap:42px}
+    }
+
+    @media (max-width:620px){
+      .shell,.nav-inner{width:min(calc(100% - 28px),var(--max))}
+      .brand-copy{display:none}
+      .hero{min-height:auto;padding-bottom:34px}
+      .hero-grid{gap:12px}
+      .hero h1{font-size:clamp(64px,22vw,104px)}
+      .hero-art{min-height:320px}
+      .hero-art:before{width:280px}
+      .monogram{font-size:210px}
+      .art-year{width:68px;height:68px;right:0}
+      .cta-row{display:grid;grid-template-columns:1fr;width:100%}
+      .btn{width:100%}
+      .trust-grid{grid-template-columns:1fr}
+      .trust-item{border-right:0;padding-left:0}
+      section{padding:90px 0}
+      .section-head{margin-bottom:48px}
+      .steps{border:0;background:transparent;gap:12px}
+      .step{padding:30px;min-height:280px}
+      .poster{min-height:420px}
+      .micro-list{grid-template-columns:1fr}
+      .info-card{min-height:255px}
+      .location-copy{padding:38px 28px}
+      .location-card{margin-inline:-14px}
+      .map-art{min-height:360px}
+      .footer-grid{align-items:flex-start;flex-direction:column}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*:before,*:after{transition:none!important;animation:none!important}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BarberShop",
+    "name":"NEW STYLE BARBER SHOP",
+    "telephone":"+57 323 4526325",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Cra. 14 #3-44",
+      "addressLocality":"Girardota",
+      "addressRegion":"Antioquia",
+      "addressCountry":"CO"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="nav" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a class="brand" href="#inicio" aria-label="NEW STYLE BARBER SHOP, inicio">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>NEW STYLE</strong>
+          <span>Barber Shop · Girardota</span>
+        </span>
+      </a>
+
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
+        <span></span>
+      </button>
+
+      <nav id="nav-links" class="nav-links">
+        <a href="#visita">Tu visita</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a href="#preguntas">Preguntas</a>
+        <a class="nav-cta" href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">Reservar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="inicio">
+      <div class="shell hero-grid">
+        <div>
+          <div class="eyebrow">Barbería en Girardota</div>
+          <h1>Tu corte.<br><span class="stroke">Tu estilo.</span><br>Bien hecho.</h1>
+          <p class="hero-intro">
+            Una experiencia de barbería directa, cómoda y sin complicaciones. Reserva online y llega listo para tu próxima visita.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">
+              Reservar online <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="btn btn-secondary" href="tel:+573234526325">
+              Llamar <span aria-hidden="true">+57 323 452 6325</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-year">New<br>Style</div>
+          <div class="monogram">NS</div>
+          <div class="art-tag">Girardota · Antioquia · Colombia</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust" aria-label="Información rápida">
+      <div class="shell trust-grid">
+        <div class="trust-item">
+          <b>Ubicación</b>
+          <span>Girardota, Antioquia</span>
+        </div>
+        <div class="trust-item">
+          <b>Reserva</b>
+          <span>Agenda online disponible</span>
+        </div>
+        <div class="trust-item">
+          <b>Atención</b>
+          <span>Servicios en el local</span>
+        </div>
+        <div class="trust-item">
+          <b>Comodidad</b>
+          <span>Apto para niños · parqueadero gratuito</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visita">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Tu próxima visita</div>
+            <h2>Menos vueltas.<br>Más estilo.</h2>
+          </div>
+          <p>
+            El camino más simple es el mejor: consulta los servicios disponibles, elige un horario y llega a la barbería con tu cita lista.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">01</div>
+            <h3>Elige tu servicio</h3>
+            <p>Consulta la oferta vigente directamente en la plataforma de reservas.</p>
+            <a href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">Ver servicios ↗</a>
+          </article>
+
+          <article class="step">
+            <div class="step-num">02</div>
+            <h3>Escoge tu horario</h3>
+            <p>Selecciona una disponibilidad que te funcione y completa tu reserva online.</p>
+            <a href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">Reservar ahora ↗</a>
+          </article>
+
+          <article class="step">
+            <div class="step-num">03</div>
+            <h3>Llega a la barbería</h3>
+            <p>Te esperamos en Cra. 14 #3-44, Girardota, Antioquia.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Cra.%2014%20%233-44%2C%20Girardota%2C%20Antioquia%2C%20Colombia" target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="craft">
+      <div class="shell craft-grid">
+        <div class="poster" aria-hidden="true">
+          <div class="razor"></div>
+        </div>
+
+        <div class="craft-copy">
+          <div class="eyebrow">Precisión en cada visita</div>
+          <h2>El detalle cambia todo.</h2>
+          <p>
+            Un buen corte no debería sentirse genérico. La barbería es un espacio para definir tu estilo, mantenerlo y salir sintiéndote más tú.
+          </p>
+          <p>
+            NEW STYLE BARBER SHOP concentra la experiencia en lo importante: una visita clara, una reserva sencilla y un punto físico fácil de encontrar en Girardota.
+          </p>
+
+          <div class="micro-list" aria-label="Características del local">
+            <div class="micro">
+              <b>Reserva digital</b>
+              Revisa disponibilidad antes de salir.
+            </div>
+            <div class="micro">
+              <b>Atención local</b>
+              Servicio presencial en Girardota.
+            </div>
+            <div class="micro">
+              <b>Familias</b>
+              El perfil público del negocio indica que es apto para niños.
+            </div>
+            <div class="micro">
+              <b>Parqueadero</b>
+              El perfil público indica opciones gratuitas de estacionamiento.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Todo en un lugar</div>
+            <h2>Antes de venir.</h2>
+          </div>
+          <p>
+            Reserva, contacto y ubicación sin buscar entre varias páginas. Lo esencial está a un clic.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <article class="info-card">
+            <div class="info-icon">01</div>
+            <h3>Reserva online</h3>
+            <p>Consulta la disponibilidad y la lista vigente de servicios en Beunik.</p>
+            <a href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">Abrir reservas ↗</a>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">02</div>
+            <h3>Contacto directo</h3>
+            <p>¿Necesitas confirmar algo antes de reservar? Comunícate por teléfono con la barbería.</p>
+            <a href="tel:+573234526325">+57 323 452 6325</a>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">03</div>
+            <h3>Cómo llegar</h3>
+            <p>Encuentra NEW STYLE BARBER SHOP en el centro de Girardota.</p>
+            <a href="#ubicacion">Ver ubicación ↓</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="location" id="ubicacion">
+      <div class="shell">
+        <div class="location-card">
+          <div class="location-copy">
+            <div class="eyebrow">Encuéntranos</div>
+            <h2>Girardota,<br>Antioquia.</h2>
+            <div class="address">Cra. 14 #3-44, Girardota, Antioquia, Colombia</div>
+
+            <div class="contact-stack">
+              <a href="tel:+573234526325">+57 323 452 6325</a>
+              <a href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">Reservar en Beunik ↗</a>
+            </div>
+
+            <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Cra.%2014%20%233-44%2C%20Girardota%2C%20Antioquia%2C%20Colombia" target="_blank" rel="noopener noreferrer">
+              Abrir en Google Maps <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="map-art" aria-label="Representación gráfica de la ubicación">
+            <div class="pin" aria-hidden="true"></div>
+            <div class="map-label">Cra. 14 #3-44 · Girardota</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="preguntas">
+      <div class="shell faq-grid">
+        <div>
+          <div class="eyebrow">Información útil</div>
+          <h2>Antes de reservar.</h2>
+        </div>
+
+        <div>
+          <details>
+            <summary>¿Cómo reservo una cita?</summary>
+            <p>Usa el botón “Reservar” para abrir la página de NEW STYLE BARBER SHOP en Beunik y seleccionar entre las opciones disponibles.</p>
+          </details>
+          <details>
+            <summary>¿Qué servicios están disponibles?</summary>
+            <p>La lista vigente de servicios se consulta directamente en la plataforma de reservas, así evitamos mostrar información desactualizada.</p>
+          </details>
+          <details>
+            <summary>¿Puedo ir con niños?</summary>
+            <p>El perfil público del negocio indica que el establecimiento es apto para niños.</p>
+          </details>
+          <details>
+            <summary>¿Hay dónde parquear?</summary>
+            <p>El perfil público del negocio indica opciones de parqueadero gratuito y estacionamiento gratuito en la calle.</p>
+          </details>
+          <details>
+            <summary>¿Cuál es el número de contacto?</summary>
+            <p>Puedes llamar al +57 323 452 6325.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="shell">
+        <h2>Tu próxima visita empieza aquí.</h2>
+        <p>Consulta disponibilidad y reserva directamente con NEW STYLE BARBER SHOP.</p>
+        <div class="cta-row" style="justify-content:center">
+          <a class="btn btn-primary" href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">
+            Reservar online <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn-secondary" href="tel:+573234526325">Llamar ahora</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div>
+        <strong style="color:#fff;letter-spacing:.08em">NEW STYLE BARBER SHOP</strong><br>
+        Cra. 14 #3-44 · Girardota, Antioquia
+      </div>
+      <div class="footer-links">
+        <a href="tel:+573234526325">Llamar</a>
+        <a href="https://beunik.co/entity-view/456" target="_blank" rel="noopener noreferrer">Reservar</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cra.%2014%20%233-44%2C%20Girardota%2C%20Antioquia%2C%20Colombia" target="_blank" rel="noopener noreferrer">Mapa</a>
+      </div>
+      <div>© <span id="year"></span> NEW STYLE</div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuBtn?.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    navLinks?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+        menuBtn?.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
